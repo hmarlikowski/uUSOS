@@ -1,0 +1,80 @@
+CREATE TABLE grupa_dziekanska (
+  id       SERIAL NOT NULL, 
+  numer   int4 NOT NULL, 
+  rocznik char(4) NOT NULL, 
+  PRIMARY KEY (id), 
+  CONSTRAINT gr_numer 
+    CHECK (numer > 0), 
+  CONSTRAINT grup_rocznik 
+    CHECK (rocznik ~ '[0-9]{4}'));
+    
+CREATE TABLE student (
+  id                  SERIAL NOT NULL, 
+  grupa_dziekanskaid int4 NOT NULL, 
+  imie               varchar(32) NOT NULL, 
+  nazwisko           varchar(32) NOT NULL, 
+  nr_indeksu         char(6) NOT NULL UNIQUE, 
+  pesel              char(11) NOT NULL UNIQUE, 
+  PRIMARY KEY (id), 
+  CONSTRAINT student_pesel 
+    CHECK (pesel ~ '[0-9]{11}'), 
+  CONSTRAINT student_nr_ind 
+    CHECK (nr_indeksu ~ '[0-9]{6}'));
+ALTER TABLE student ADD CONSTRAINT nalezy FOREIGN KEY (grupa_dziekanskaid) REFERENCES grupa_dziekanska (id);
+
+
+CREATE TABLE przedmiot (
+  id     SERIAL NOT NULL, 
+  nazwa varchar(255) NOT NULL UNIQUE, 
+  opis  varchar(255), 
+  ects  int4 NOT NULL CHECK(ects >= 0), 
+  PRIMARY KEY (id), 
+  CONSTRAINT przedmiot_ects 
+    CHECK (ects BETWEEN 0 AND 30));
+
+
+CREATE TABLE edycja_przedmiotu (
+  id                 SERIAL NOT NULL, 
+  przedmiotid       int4 NOT NULL, 
+  rok               char(7) NOT NULL, 
+  sposob_zaliczenia varchar(200), 
+  PRIMARY KEY (id), 
+  CONSTRAINT edycja_rok_format 
+    CHECK (rok ~ '[0-9]{4}/[0-9]{2}'));
+ALTER TABLE edycja_przedmiotu ADD CONSTRAINT nalezy FOREIGN KEY (przedmiotid) REFERENCES przedmiot (id);
+
+CREATE TABLE projekt (
+  id                   SERIAL NOT NULL, 
+  edycja_przedmiotuid int4 NOT NULL, 
+  numer               int4 NOT NULL CHECK(numer > 0), 
+  temat               varchar(255) NOT NULL, 
+  opis                varchar(255), 
+  data_oddania        date NOT NULL, 
+  PRIMARY KEY (id), 
+  CONSTRAINT projekt_nr_gt_0 
+    CHECK (numer > 0));
+ALTER TABLE projekt ADD CONSTRAINT FKprojekt806189 FOREIGN KEY (edycja_przedmiotuid) REFERENCES edycja_przedmiotu (id);
+
+    
+CREATE TABLE student_edycja_przedmiotu (
+  studentid           int4 NOT NULL, 
+  edycja_przedmiotuid int4 NOT NULL, 
+  PRIMARY KEY (studentid, 
+  edycja_przedmiotuid));
+ALTER TABLE student_edycja_przedmiotu ADD CONSTRAINT FKstudent_ed293710 FOREIGN KEY (studentid) REFERENCES student (id);
+ALTER TABLE student_edycja_przedmiotu ADD CONSTRAINT FKstudent_ed60642 FOREIGN KEY (edycja_przedmiotuid) REFERENCES edycja_przedmiotu (id);
+
+
+CREATE TABLE student_edycja_przedmiotu_projekt (
+  student_edycja_przedmiotustudentid           int4 NOT NULL, 
+  student_edycja_przedmiotuedycja_przedmiotuid int4 NOT NULL, 
+  projektid                                    int4 NOT NULL, 
+  ocena                                        int4, 
+  uwagi                                        varchar(200), 
+  PRIMARY KEY (student_edycja_przedmiotustudentid, 
+  student_edycja_przedmiotuedycja_przedmiotuid, 
+  projektid), 
+  CONSTRAINT student_edycja_przedmiotu_projekt_ocena 
+    CHECK (ocena BETWEEN 2 AND 5));
+ALTER TABLE student_edycja_przedmiotu_projekt ADD CONSTRAINT FKstudent_ed497037 FOREIGN KEY (student_edycja_przedmiotustudentid, student_edycja_przedmiotuedycja_przedmiotuid) REFERENCES student_edycja_przedmiotu (studentid, edycja_przedmiotuid);
+ALTER TABLE student_edycja_przedmiotu_projekt ADD CONSTRAINT FKstudent_ed755620 FOREIGN KEY (projektid) REFERENCES projekt (id);

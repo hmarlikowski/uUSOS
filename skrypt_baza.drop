@@ -1,0 +1,28 @@
+ALTER TABLE student_edycja_przedmiotu_projekt DROP CONSTRAINT FKstudent_ed497037;
+ALTER TABLE student_edycja_przedmiotu_projekt DROP CONSTRAINT FKstudent_ed755620;
+DROP TABLE IF EXISTS student_edycja_przedmiotu_projekt CASCADE;
+
+ALTER TABLE student_edycja_przedmiotu DROP CONSTRAINT FKstudent_ed293710;
+ALTER TABLE student_edycja_przedmiotu DROP CONSTRAINT FKstudent_ed60642;
+DROP TABLE IF EXISTS student_edycja_przedmiotu CASCADE;
+
+ALTER TABLE projekt DROP CONSTRAINT FKprojekt806189;
+DROP TABLE IF EXISTS projekt CASCADE;
+
+ALTER TABLE edycja_przedmiotu DROP CONSTRAINT nalezy;
+DROP TABLE IF EXISTS edycja_przedmiotu CASCADE;
+
+DROP TABLE IF EXISTS przedmiot CASCADE;
+
+ALTER TABLE student DROP CONSTRAINT nalezy;
+DROP TABLE IF EXISTS student CASCADE;
+
+DROP TABLE IF EXISTS  grupa_dziekanska CASCADE;
+
+
+
+
+
+
+
+

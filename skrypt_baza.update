@@ -1,0 +1,11 @@
+/*
+UPDATE grupa_dziekanska SET numer = ?, rocznik = ? WHERE id = ?;
+UPDATE student SET grupa_dziekanskaid = ?, imie = ?, nazwisko = ?, nr_indeksu = ?, pesel = ? WHERE id = ?;
+UPDATE przedmiot SET nazwa = ?, opis = ?, ects = ? WHERE id = ?;
+UPDATE student_edycja_przedmiotu SET  WHERE studentid = ? AND edycja_przedmiotuid = ?;
+UPDATE student_edycja_przedmiotu_projekt SET ocena = ?, uwagi = ? WHERE student_edycja_przedmiotustudentid = ? AND student_edycja_przedmiotuedycja_przedmiotuid = ? AND projektid = ?;
+UPDATE edycja_przedmiotu SET przedmiotid = ?, rok = ?, sposob_zaliczenia = ? WHERE id = ?;
+UPDATE projekt SET edycja_przedmiotuid = ?, numer = ?, temat = ?, opis = ?, data_oddania = ? WHERE id = ?;
+
+
+*/

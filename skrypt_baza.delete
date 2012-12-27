@@ -1,0 +1,13 @@
+/*
+
+DELETE FROM grupa_dziekanska WHERE id = ?;
+DELETE FROM student WHERE id = ?;
+DELETE FROM przedmiot WHERE id = ?;
+DELETE FROM student_edycja_przedmiotu WHERE studentid = ? AND edycja_przedmiotuid = ?;
+DELETE FROM student_edycja_przedmiotu_projekt WHERE student_edycja_przedmiotustudentid = ? AND student_edycja_przedmiotuedycja_przedmiotuid = ? AND projektid = ?;
+DELETE FROM edycja_przedmiotu WHERE id = ?;
+DELETE FROM projekt WHERE id = ?;
+
+
+
+*/
