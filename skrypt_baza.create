@@ -36,11 +36,11 @@ CREATE TABLE przedmiot (
 CREATE TABLE edycja_przedmiotu (
   id                 SERIAL NOT NULL, 
   przedmiotid       int4 NOT NULL, 
-  rok               char(7) NOT NULL, 
+  rok               char(4) NOT NULL, 
   sposob_zaliczenia varchar(200), 
   PRIMARY KEY (id), 
   CONSTRAINT edycja_rok_format 
-    CHECK (rok ~ '[0-9]{4}/[0-9]{2}'));
+    CHECK (rok ~ '[0-9]{4}'));
 ALTER TABLE edycja_przedmiotu ADD CONSTRAINT nalezy FOREIGN KEY (przedmiotid) REFERENCES przedmiot (id);
 
 CREATE TABLE projekt (
