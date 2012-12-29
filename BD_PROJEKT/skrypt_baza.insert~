@@ -1,0 +1,43 @@
+
+/* wstawienie przykladowych danych */
+
+/*
+declare
+  id integer;
+  a integer;
+  b integer;
+begin
+  for id in 1..10 loop
+    insert into gatunki values (768902 + id, 'wiezien typu ' || id, id*51 -3,
+      'pasiak', 'kasza', 1);
+    insert into gatunki values (768922 + id, 'klawisz typu ' || id, id*35 -3,
+      'mundur', 'schabowy', 0.5*id);
+    insert into lasy values (74000 + id, 'Areszt nr ' || id * 20,
+      'kibel', id *3);
+    insert into pasniki  values (5545+2*id, 'kasza', 100+id, 74000 + id);
+    insert into pasniki  values (5545+2*id+1, 'schabowy', 100+id, 74000 + id);
+  end loop;
+
+  for i in 1..10 loop
+    for j in 1..10 loop
+      insert into pozeranie values (768922 + i, 768902 + j, 3);
+      insert into wystapienia values (74000 + i, 768902 + j, i*j);
+      insert into wystapienia values (74000 + i, 768922 + j, i*j+54);
+    end loop;
+  end loop;
+end;
+/
+
+
+
+
+INSERT INTO grupa_dziekanska (id, numer, rocznik) VALUES (?, ?, ?);
+INSERT INTO student (id, grupa_dziekanskaid, imie, nazwisko, nr_indeksu, pesel) VALUES (?, ?, ?, ?, ?, ?);
+INSERT INTO przedmiot(id, nazwa, opis, ects) VALUES (?, ?, ?, ?);
+INSERT INTO student_edycja_przedmiotu(studentid, edycja_przedmiotuid) VALUES (?, ?);
+INSERT INTO student_edycja_przedmiotu_projekt(student_edycja_przedmiotustudentid, student_edycja_przedmiotuedycja_przedmiotuid, projektid, ocena, uwagi) VALUES (?, ?, ?, ?, ?);
+INSERT INTO edycja_przedmiotu(id, przedmiotid, rok, sposob_zaliczenia) VALUES (?, ?, ?, ?);
+
+
+*/
+

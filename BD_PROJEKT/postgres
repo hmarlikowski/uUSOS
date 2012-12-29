@@ -1,0 +1,13 @@
+#!/bin/bash
+psql -d test -h 127.0.0.1 -U postgres
+
+#SHOW ALL;
+#SHOW data_directory;
+#\! pwd
+#\d
+#\d ludnosc
+#\? \h
+
+#executeQuerry - zwraca dane
+#executeUpdate nie zwraca danych
+# $ /usr/bin/time java -cp .:lib/postgresql.jdbc4.jar zetcode.NotPrepared

@@ -1,0 +1,9 @@
+CREATE TABLE grupa_dziekanska (
+  id       SERIAL NOT NULL, 
+  numer   int4 NOT NULL, 
+  rocznik char(4) NOT NULL, 
+  PRIMARY KEY (id), 
+  CONSTRAINT gr_numer 
+    CHECK (numer > 0), 
+  CONSTRAINT grup_rocznik 
+    CHECK (rocznik LIKE '\d{4}'));
