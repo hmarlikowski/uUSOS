@@ -1964,10 +1964,14 @@ public class OKNAView extends FrameView {
     private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
         String tekst;
         jLabel16.setText("");
+        if((jTable4.getSelectedRow() >= 0) && (jTable4.getSelectedRow() >= 0))
+            if((jTable3.getModel().getValueAt(jTable3.getSelectedRow(), 0) != null) && (jTable4.getModel().getValueAt(jTable4.getSelectedRow(), 0) != null))
+                if(edycja_przedmiotu_przydzial.containsKey((String)jList4.getSelectedValue())){
         b.executeUpdate("INSERT INTO student_edycja_przedmiotu_projekt(student_edycja_przedmiotustudentid, student_edycja_przedmiotuedycja_przedmiotuid, projektid) VALUES ("+ jTable3.getModel().getValueAt(jTable3.getSelectedRow(), 0) +", "+ edycja_przedmiotu_przydzial.get((String)jList4.getSelectedValue()) +", "+ jTable4.getModel().getValueAt(jTable4.getSelectedRow(), 0) +")");
         //jLabel16.setText(""+jTable3.getModel().getValueAt(jTable3.getSelectedRow(), 0));
         //b.executeUpdate("INSERT INTO projekt(id, edycja_przedmiotuid, numer, temat, opis, data_oddania) VALUES (DEFAULT, "+edycja_przedmiotu.get((String)jList2.getSelectedValue())+", "+numer+", '"+temat+"', '"+opis+"', '"+data+"')");
        jLabel16.setText("Przydzielono.");
+                }
     }//GEN-LAST:event_jButton3MouseClicked
 
     private void jList3ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jList3ValueChanged

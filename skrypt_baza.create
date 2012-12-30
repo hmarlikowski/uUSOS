@@ -1,3 +1,5 @@
+CREATE LANGUAGE plpgsql;
+
 CREATE TABLE grupa_dziekanska (
   id       SERIAL NOT NULL, 
   numer   int4 NOT NULL, 

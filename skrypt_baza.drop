@@ -1,3 +1,5 @@
+DROP TRIGGER sprawdz_date_trigger ON projekt;
+
 ALTER TABLE student_edycja_przedmiotu_projekt DROP CONSTRAINT FKstudent_ed497037;
 ALTER TABLE student_edycja_przedmiotu_projekt DROP CONSTRAINT FKstudent_ed755620;
 DROP TABLE IF EXISTS student_edycja_przedmiotu_projekt CASCADE;

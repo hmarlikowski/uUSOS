@@ -1,0 +1,16 @@
+CREATE OR REPLACE FUNCTION sprawdz_date() RETURNS TRIGGER AS $moj_trig$
+BEGIN
+	IF EXISTS (SELECT p.id
+	FROM projekt p
+	WHERE p.data_oddania < date '2000-01-01'
+	) THEN
+	RAISE EXCEPTION 'BLEDNA DATA';
+	END IF;
+RETURN NULL;
+END;
+$moj_trig$ LANGUAGE plpgsql;
+
+CREATE TRIGGER sprawdz_date_trigger
+AFTER INSERT ON projekt
+FOR EACH ROW
+EXECUTE PROCEDURE sprawdz_date();
