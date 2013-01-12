@@ -1,0 +1,52 @@
+Hubert Marlikowski 
+hm306317 
+
+Dlaczego baza uUSOS spełnia warunki 3NF? 
+(Schemat bazy znajduje się w pliku diagram_ver4.jpg również zamieszczonym w repozytorium.) 
+
+Po pierwsze - jest w 1NF, gdyż wartości trzymane w każdej z tabel są atomowe, a przynajmniej tak są traktowane, np. mimo że datę można potencjalnie rozbić na dzień, miesiąc i rok, to zawsze używana jest jako całość. 
+
+Po drugie - jest w 2NF, bo jest w 1NF oraz dla każdej relacji każdy atrybut spoza klucza głównego tej relacji jest od niego w pełni funkcyjnie zależny, tzn. nie jest zależny funkcyjnie od żadnego podzbioru właściwego tego klucza. 
+
+Dowód: Dla relacji, których klucz główny jest jednoargumentowy, powyższy warunek jest spełniony w sposób oczywisty. Istnieją tylko 2 relacje w bazie, których klucz główny nie jest jednoargumentowy. Są to student_edycja_przedmiotu i student_edycja_przedmiotu_projekt. Są to jednak tabele łączące, wynikające z istnienia relacji typu wiele do wielu. W przypadku relacji student_edycja_przedmiotu, oba atrybuty relacji należą do klucza głównego, klucz ten jest zaś minimalny, gdyż tylko z jednego jego atrybutu nie da się wywnioskować drugiego. W przypadku relacji student_edycja_przedmiotu_projekt jedyne atrybuty spoza klucza głównego to ocena i uwagi. Odnoszą się one do konkretnego projektu wykonywanego przez danego studenta w ramach danej edycji przedmiotu, zatem do ich identyfikacji potrzebne są wszystkie trzy atrybuty klucza głównego. 
+
+Zatem warunki 2NF są spełnione. 
+
+Po trzecie - jest w 3NF, gdyż jest w 1NF, 2NF oraz dla każdej relacji spełniony jest warunek, że żaden atrybut spoza klucza nie jest od niego przechodnio zależny. Poniżej wypisano wszystkie zależności w tabelach. W przypadku tabel, gdzie istnieje tylko jedna zależność, warunek ten jest spełniony w sposób oczywisty. Istnieje tylko jedna tabela (student), w której istnieją >1 zależności. Jednak każda z nich zawiera po lewej stronie tylko i wyłącznie klucz, zatem warunek 3NF jest spełniony.
+
+Tabela: 	grupa_dziekanska
+Zależność: 	id -> numer, rocznik
+Klucz główny:	id
+Inne klucze: 	-
+
+Tabela: 	student
+Zależnośći: 	id -> grupa_dziekanskaid, imie, nazwisko, nr_indeksu, pesel
+		nr_indeksu -> id
+		pesel -> id
+Klucz główny: 	id
+Inne klucze:	nr_indeksu, pesel
+
+Tabela: 	przedmiot
+Zależność: 	id -> nazwa, opis, ects
+Klucz główny:	id
+Inne klucze: 	-
+
+Tabela: 	edycja_przedmiotu
+Zależność: 	id -> przedmiot_id, rok, sposob_zaliczenia
+Klucz główny:	id
+Inne klucze: 	-
+
+Tabela: 	projekt
+Zależność: 	id -> edycja_przedmiotuid, numer, temat, opis, data_oddania
+Klucz główny:	id
+Inne klucze: 	-
+
+Tabela: 	student_edycja_przedmiotu
+Zależność: 	-
+Klucz główny:	(studentid, edycja_przedmiotuid)
+Inne klucze: 	-
+
+Tabela: 	student_edycja_przedmiotu_projekt
+Zależność: 	student_edycja_przedmiotustudentid, student_edycja_przedmiotuedycja_przedmiotuid, projektid -> ocena, uwagi 
+Klucz główny:	(student_edycja_przedmiotustudentid, student_edycja_przedmiotuedycja_przedmiotuid, projektid)
+Inne klucze: 	-
